@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momin's Tech Blog</title>
+    <style>
+        :root {
+            --primary-color: #3b82f6; /* Blue */
+            --bg-color: #0f172a; /* Slate 900 */
+            --text-color: #f8fafc; /* Slate 50 */
+            --card-bg: #1e293b; /* Slate 800 */
+            --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        header p {
+            color: #94a3b8;
+            font-size: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .post-card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .post-title {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .post-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .post-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .post-date {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .post-excerpt {
+            color: #cbd5e1;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            font-size: 0.875rem;
+            border-top: 1px solid #334155;
+            margin-top: 4rem;
+        }
+
+        /* Pretendard Font */
+        @font-face {
+            font-family: 'Pretendard';
+            font-weight: 400;
+            font-display: swap;
+            src: local('Pretendard Regular'), url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'Pretendard';
+            font-weight: 700;
+            font-display: swap;
+            src: local('Pretendard Bold'), url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'Pretendard';
+            font-weight: 800;
+            font-display: swap;
+            src: local('Pretendard ExtraBold'), url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Momin's Tech Blog</h1>
+        <p>개발, 서버, 그리고 다양한 생각들을 기록합니다.</p>
+    </header>
+
+    <main>
+        <article class="post-card">
+            <h2 class="post-title"><a href="#">첫 번째 블로그 포스트</a></h2>
+            <div class="post-date">2026년 3월 31일</div>
+            <p class="post-excerpt">
+                환영합니다! 이곳은 저의 기술 블로그입니다. 앞으로 코딩, 데브옵스, AI 등 다양한 주제에 대해 글을 작성할 예정입니다.
+            </p>
+        </article>
+
+        <article class="post-card">
+            <h2 class="post-title"><a href="#">Github Pages로 블로그 시작하기</a></h2>
+            <div class="post-date">2026년 3월 30일</div>
+            <p class="post-excerpt">
+                Github Pages와 HTML/CSS를 활용하여 나만의 정적 웹사이트를 구축하는 방법을 알아봅니다. 정적 웹사이트는 빠르고 호스팅 비용이 들지 않는다는 장점이 있습니다.
+            </p>
+        </article>
+    </main>
+
+    <footer>
+        &copy; 2026 Momin. All rights reserved.
+    </footer>
+
+</body>
+</html>
