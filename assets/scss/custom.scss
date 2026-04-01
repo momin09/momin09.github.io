@@ -356,7 +356,8 @@ li.sidebar-cat-item {
     font-weight: 700;
     padding: 0.2rem 0.7rem;
     border-radius: 0.3rem;
-    min-width: 7.5rem;
+    width: 9rem;
+    flex-shrink: 0;
     text-align: center;
 }
 
