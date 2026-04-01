@@ -1,14 +1,19 @@
 baseURL                = "https://momin09.github.io/"
 languageCode           = "ko-kr"
 title                  = "KIM HOMIN | DevOps Blog"
-# Theme i18n support
-# See i18n folder for available languages
 defaultContentLanguage = "en"
-# Set hasCJKLanguage to true if DefaultContentLanguage is a CJK language
-# This will make .Summary and .WordCount behave correctly
 hasCJKLanguage         = true
 
 theme = "hugo-theme-stack"
+
+# 다국어(ja/zh) 파일 및 불필요한 기본 테마 콘텐츠 제외
+ignoreFiles = [
+    '\\.ja\\.md$',
+    '\\.zh\\.md$',
+    '\\.zh-hant-tw\\.md$',
+    'content/categories/Documentation',
+    'content/page/links',
+]
 
 [taxonomies]
     category = "categories"
