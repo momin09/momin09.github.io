@@ -1,18 +1,21 @@
 ---
 title: About
-description: Cloud | DevOps | SRE Engineer - KIM HOMIN
+description: Cloud | DevOps | Kubernetes Engineer - KIM HOMIN
 date: 2026-03-30
 lastmod: 2026-03-30
 menu:
-    main: 
+    main:
         weight: -90
         params:
             icon: user
+tableOfContents:
+    startLevel: 2
+    endLevel: 2
 ---
 
 # KIM HOMIN
 
-**Cloud | DevOps | SRE**
+**Cloud | DevOps | Kubernetes**
 
 > [!INFO] Contact
 > - 📧 khm0909z@gmail.com
@@ -23,7 +26,7 @@ menu:
 
 ## PROFESSIONAL SUMMARY
 
-> **"대규모 엔터프라이즈 트래픽을 처리하는 대한항공 DCO 프로젝트의 SRE/Cloud 엔지니어"**
+> **"대규모 엔터프라이즈 트래픽을 처리하는 DevOps/Cloud 엔지니어"**
 >
 > AWS Solutions Architect Professional 및 CKA 자격을 보유한 3년 차 DevOps 엔지니어입니다. Enterprise급 아키텍처 설계를 기반으로 인프라를 빈틈없이 구현하고, 운영 효율성을 고려하여 설계를 기술적으로 보완하는 역량을 보유하고 있습니다. 특히 YAML 기반의 Terraform 프레임워크를 독자 개발하여 IaC 진입 장벽을 낮추고, 데이터 기반의 성능 최적화를 통해 서비스 안정성을 확보하는 데 주력합니다.
 
