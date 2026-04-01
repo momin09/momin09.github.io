@@ -1,21 +1,21 @@
 baseURL                = "https://momin09.github.io/"
 languageCode           = "ko-kr"
-title                  = "My Blog"
+title                  = "KIM HOMIN | DevOps Blog"
 # Theme i18n support
 # See i18n folder for available languages
 defaultContentLanguage = "en"
 # Set hasCJKLanguage to true if DefaultContentLanguage is a CJK language
 # This will make .Summary and .WordCount behave correctly
-hasCJKLanguage         = false
+hasCJKLanguage         = true
 
 theme = "hugo-theme-stack"
+
+[taxonomies]
+    category = "categories"
+    tag      = "tags"
 
 [pagination]
     pagerSize = 5
 
 [permalinks]
-    post = "/p/:slug/"
-    page = "/:slug/"
-
-[services.disqus]
-    shortname = "hugo-theme-stack"
+    post = "/p/:slu

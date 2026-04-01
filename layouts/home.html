@@ -1,0 +1,100 @@
+{{ define "main" }}
+    {{- $paginator := partial "helper/paginator.html" . -}}
+
+    <!-- Hero Section -->
+    <section class="hero-profile">
+
+        <div class="hero-header">
+            <div>
+                <p class="hero-role">☁️ Cloud &amp; DevOps Engineer</p>
+                <p class="hero-sub">AWS · Kubernetes · Terraform · Python &nbsp;|&nbsp; DevOps → AI DevOps</p>
+            </div>
+        </div>
+
+        <div class="hero-body">
+            <!-- 자격증 -->
+            <div class="hero-col">
+                <div class="hero-col-title">🏅 Certifications</div>
+                <ul class="cert-timeline">
+                    <li class="cert-row tier-1">
+                        <span class="cert-year">2024</span>
+                        <span class="cert-tag">AWS SAP</span>
+                    </li>
+                    <li class="cert-row tier-2">
+                        <span class="cert-year">2023</span>
+                        <span class="cert-tag">CKA</span>
+                        <span class="cert-tag">AWS SAA</span>
+                    </li>
+                    <li class="cert-row tier-3">
+                        <span class="cert-year">2022</span>
+                        <span class="cert-tag">정보처리기사</span>
+                        <span class="cert-tag">네트워크관리사 2급</span>
+                    </li>
+                    <li class="cert-row tier-3">
+                        <span class="cert-year">2021</span>
+                        <span class="cert-tag">AWS CCP</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 기술 스택 -->
+            <div class="hero-col">
+                <div class="hero-col-title">🛠 Tech Stack</div>
+                <div class="skill-grid">
+                    <div class="skill-row">
+                        <span class="skill-label label-cloud">Cloud</span>
+                        <span class="skill-chip">AWS</span>
+                        <span class="skill-chip">EKS</span>
+                        <span class="skill-chip">Lambda</span>
+                        <span class="skill-chip">CloudFront</span>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-label label-k8s">Container</span>
+                        <span class="skill-chip">Kubernetes</span>
+                        <span class="skill-chip">Helm</span>
+                        <span class="skill-chip">Docker</span>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-label label-iac">IaC</span>
+                        <span class="skill-chip">Terraform</span>
+                        <span class="skill-chip">AWS SAM</span>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-label label-cicd">CI/CD</span>
+                        <span class="skill-chip">Jenkins</span>
+                        <span class="skill-chip">ArgoCD</span>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-label label-obs">Observability</span>
+                        <span class="skill-chip">Datadog</span>
+                        <span class="skill-chip">CloudWatch</span>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-label label-code">Script</span>
+                        <span class="skill-chip">Python</span>
+                        <span class="skill-chip">Bash</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Post List -->
+    <div class="post-list-header">
+        <h2>최신 글</h2>
+    </div>
+
+    <section class="article-list">
+        {{ range $index, $element := $paginator.Pages }}
+            {{ partial "article-list/default" . }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

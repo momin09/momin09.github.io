@@ -1,0 +1,42 @@
+{{ define "body-class" }}template-archives{{ end }}
+
+{{ define "main" }}
+
+    <!-- 카테고리 목록 -->
+    {{- $taxonomy := $.Site.GetPage "taxonomyTerm" "categories" -}}
+    {{- $terms := $taxonomy.Pages -}}
+    {{ if $terms }}
+    <div class="archives-section">
+        <h2 class="section-title">카테고리</h2>
+        <div class="category-list">
+            {{ range $terms.ByTitle }}
+            <a href="{{ .RelPermalink }}" class="category-list-item">
+                <span class="category-list-name">{{ .Title }}</span>
+                <span class="category-list-count">{{ len .Pages }} 개</span>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+
+    <!-- 연도별 포스트 -->
+    {{ $pages := partial "helper/pages.html" .Site.Home }}
+    {{ if $pages }}
+    <div class="archives-section">
+        <h2 class="section-title">전체 글</h2>
+        {{ range $pages.GroupByDate "2006" }}
+        {{ $id := lower (replace .Key " " "-") }}
+        <div class="archives-group" id="{{ $id }}">
+            <h3 class="archives-date"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></h3>
+            <div class="article-list--compact">
+                {{ range .Pages }}
+                    {{ partial "article-list/compact" . }}
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+
+    {{ partialCached "footer/footer" . }}
+{{ end }}

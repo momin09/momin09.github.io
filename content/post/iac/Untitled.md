@@ -1,6 +1,6 @@
 ---
-title: "글 시작"
+title: "Terraform"
 date: 2026-03-31T03:17:00+09:00
 draft: false
 ---
-첫 블로그 글입니다!
+테라폼 시작!!!
