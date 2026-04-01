@@ -13,6 +13,8 @@ ignoreFiles = [
     '\\.zh-hant-tw\\.md$',
     'content/categories/Documentation',
     'content/page/links',
+    'content/post/project',
+    'content/categories/project',
 ]
 
 [taxonomies]
