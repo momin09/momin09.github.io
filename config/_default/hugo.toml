@@ -23,4 +23,12 @@ ignoreFiles = [
     pagerSize = 5
 
 [permalinks]
-    post = "/p/:slu
+    post = "/p/:slug"
+
+[minify]
+    disableXML = true
+
+[params]
+    mainSections  = ["post"]
+    rssFullContent = true
+    favicon       = "img/avatar.png"
