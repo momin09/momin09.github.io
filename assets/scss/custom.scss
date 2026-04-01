@@ -212,6 +212,44 @@ li.sidebar-cat-item {
 }
 
 /* =========================================
+   사이드바 아바타: 원형 → 사각형
+   ========================================= */
+
+.sidebar.left-sidebar header {
+    margin-top: -1rem !important;
+    gap: 0 !important;
+    align-items: flex-start !important;
+}
+
+.site-avatar {
+    --sidebar-avatar-size: 220px !important;
+    margin-bottom: 0.5rem !important;
+    margin-left: -3.5rem !important;
+
+    .site-logo {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        object-fit: contain;
+    }
+
+    .emoji {
+        display: none !important;
+    }
+}
+
+.site-meta {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+@media (min-width: 1536px) {
+    .site-avatar {
+        --sidebar-avatar-size: 240px !important;
+    }
+}
+
+/* =========================================
    Hero Profile
    ========================================= */
 

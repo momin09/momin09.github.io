@@ -6,7 +6,7 @@ favicon        = "img/avatar.png"
     since = 2026
 
 [sidebar]
-    emoji    = "🚀"
+    emoji    = ""
     subtitle = "Cloud & DevOps Engineer"
     avatar   = "img/avatar.png"
 
