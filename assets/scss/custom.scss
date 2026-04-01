@@ -386,7 +386,7 @@ li.sidebar-cat-item {
 }
 
 /* =========================================
-   TOC 들여쓰기 축소
+   TOC 들여쓰기 축소 + 3단계(*.*.* ) 이하 숨김
    ========================================= */
 
 .widget--toc .toc-nav {
@@ -397,6 +397,12 @@ li.sidebar-cat-item {
         & > ul {
             padding-left: 4px !important;
         }
+    }
+
+    // *.*.* 이하 (h4~) 숨김 — *.* 까지만 표시
+    ol ol ol,
+    ul ul ul {
+        display: none !important;
     }
 }
 
