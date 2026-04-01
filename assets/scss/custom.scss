@@ -386,18 +386,16 @@ li.sidebar-cat-item {
 }
 
 /* =========================================
-   TOC 위젯 간격 축소
+   TOC 들여쓰기 축소
    ========================================= */
 
 .widget--toc .toc-nav {
     li {
-        margin: 2px 0 2px var(--spacing-md) !important;
-        padding: 1px 0 !important;
+        margin-left: 8px !important;
 
         & > ol,
         & > ul {
-            margin-top: 2px !important;
-            margin-bottom: 0 !important;
+            padding-left: 4px !important;
         }
     }
 }
