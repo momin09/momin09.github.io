@@ -1,4 +1,43 @@
 /* =========================================
+   Global Typography Tuning
+   ========================================= */
+
+:root {
+    --article-font-size: 1.5rem;
+
+    @media (min-width: 768px) {
+        --article-font-size: 1.55rem;
+    }
+}
+
+body {
+    font-size: 1.5rem;
+}
+
+.article-meta,
+.article-meta time,
+.article-meta a,
+.article-meta span {
+    font-size: 1.25rem !important;
+}
+
+.article-title {
+    font-size: 1.95rem !important;
+
+    @media (min-width: 1280px) {
+        font-size: 2.1rem !important;
+    }
+}
+
+.article-subtitle {
+    font-size: 1.45rem !important;
+
+    @media (min-width: 1280px) {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* =========================================
    사이드바 스크롤 제거
    ========================================= */
 
