@@ -1,16 +1,16 @@
 ---
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
-date: {{ .Date }}
+date: {{ .Date.Format "2006-01-02T15:04:05Z07:00" }}
 draft: true
 categories: []
 tags: []
 description: ""
 ---
 
-## 개요
+## 배경
 
 ## 환경
 
-## 본문
+## 핵심 내용
 
-## 마무리
+## 요약

@@ -1,0 +1,20 @@
+{{ define "body-class" }}template-archives{{ end }}
+
+{{ define "main" }}
+    <div class="archives-section projects-section">
+        <h2 class="section-title">{{ .Title }}</h2>
+        {{ with .Params.description }}
+            <p class="projects-page-description">{{ . }}</p>
+        {{ end }}
+
+        <section class="projects-page-content">
+            {{ .Content }}
+        </section>
+    </div>
+
+    {{ partialCached "footer/footer" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

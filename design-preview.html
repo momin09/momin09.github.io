@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Preview — momin09.github.io</title>
+<style>
+/* =========================================
+   Design Tokens  (개선안)
+   ========================================= */
+:root {
+  /* Brand — Hero gradient에 묻혀있던 파란색을 토큰으로 승격 */
+  --brand-primary: #2563a8;
+  --brand-primary-strong: #1e3a5f;
+  --brand-primary-soft: #eaf2fb;
+
+  /* Base */
+  --body-background: #f5f6f8;
+  --card-background: #ffffff;
+  --card-separator-color: #e6e8ee;
+  --card-border-radius: 12px;
+  --shadow-l1: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.05);
+  --shadow-l2: 0 2px 6px rgba(15, 23, 42, 0.06), 0 12px 28px rgba(15, 23, 42, 0.08);
+
+  --text-main: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #8a90a0;
+
+  --accent-color: var(--brand-primary);
+
+  /* 타이포 스케일 (22–25% 다운사이즈) */
+  --font-body: 1.0625rem;    /* 17px */
+  --font-meta: 0.8125rem;    /* 13px */
+  --font-subtitle: 1rem;     /* 16px */
+  --font-card-title: 1.35rem;/* 21.6px */
+  --font-h1: 1.8rem;         /* 28.8px */
+  --font-section: 1.25rem;   /* 20px */
+
+  /* Category tokens (재사용) */
+  --category-cloud-bg: #e0f2fe;    --category-cloud-text: #0c4a6e;
+  --category-container-bg: #ccfbf1;--category-container-text: #115e59;
+  --category-iac-bg: #ede9fe;      --category-iac-text: #5b21b6;
+  --category-cicd-bg: #fee2e2;     --category-cicd-text: #991b1b;
+  --category-observability-bg: #dcfce7; --category-observability-text: #166534;
+  --category-script-bg: #ffedd5;   --category-script-text: #9a3412;
+}
+
+html[data-theme="dark"] {
+  --body-background: #0f1115;
+  --card-background: #171a21;
+  --card-separator-color: #262a34;
+  --shadow-l1: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  --shadow-l2: 0 2px 6px rgba(0,0,0,.5), 0 14px 32px rgba(0,0,0,.45);
+
+  --text-main: #e5e7eb;
+  --text-secondary: #b5bac4;
+  --text-tertiary: #8b92a1;
+
+  --brand-primary-soft: rgba(37, 99, 168, 0.18);
+
+  --category-cloud-bg: rgba(12,74,110,.28);        --category-cloud-text: #7dd3fc;
+  --category-container-bg: rgba(17,94,89,.28);     --category-container-text: #99f6e4;
+  --category-iac-bg: rgba(91,33,182,.28);          --category-iac-text: #c4b5fd;
+  --category-cicd-bg: rgba(153,27,27,.28);         --category-cicd-text: #fca5a5;
+  --category-observability-bg: rgba(22,101,52,.28);--category-observability-text: #86efac;
+  --category-script-bg: rgba(154,52,18,.28);       --category-script-text: #fdba74;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  background: var(--body-background);
+  color: var(--text-main);
+  font-size: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================
+   Preview helper bar
+   ========================================= */
+.preview-bar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px;
+  background: var(--card-background);
+  border-bottom: 1px solid var(--card-separator-color);
+  font-size: 13px;
+}
+.preview-bar strong { color: var(--brand-primary); }
+.preview-bar .legend { color: var(--text-tertiary); }
+.preview-bar button {
+  background: var(--brand-primary);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 12px;
+}
+.preview-bar button:hover { background: var(--brand-primary-strong); }
+
+/* =========================================
+   Layout
+   ========================================= */
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+}
+
+/* =========================================
+   Hero Profile (개선안)
+   ========================================= */
+.hero-profile {
+  background: var(--card-background);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow-l1);
+  overflow: hidden;
+  margin-bottom: 28px;
+  border: 1px solid var(--card-separator-color);
+}
+
+.hero-header {
+  background: linear-gradient(135deg, var(--brand-primary-strong) 0%, var(--brand-primary) 100%);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+}
+.hero-header .hero-role {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+.hero-header .hero-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,.78);
+  margin: 0;
+  letter-spacing: .01em;
+}
+.hero-header .hero-links {
+  display: flex; gap: 8px;
+}
+.hero-header .hero-links a {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  transition: background .15s;
+}
+.hero-header .hero-links a:hover { background: rgba(255,255,255,.26); }
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.hero-col { padding: 22px 26px; }
+.hero-col:first-child { border-right: 1px solid var(--card-separator-color); }
+
+.hero-col-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+}
+
+/* 자격증 — 연/태그를 한 줄 flex row로 */
+.cert-timeline {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cert-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+.cert-year {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  min-width: 42px;
+  flex-shrink: 0;
+}
+.cert-tags { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
+.cert-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  border: 1.5px solid;
+  white-space: nowrap;
+}
+.tier-1 .cert-tag { background: #fff7ed; color: #c2410c; border-color: #fb923c; }
+.tier-2 .cert-tag { background: #eff6ff; color: #1d4ed8; border-color: #60a5fa; }
+/* tier-3 대비 강화 */
+.tier-3 .cert-tag {
+  background: var(--body-background);
+  color: var(--text-main);
+  border-color: #c7cbd4;
+}
+html[data-theme="dark"] .tier-1 .cert-tag { background: rgba(194,65,12,.18); color: #fdba74; border-color: #c2410c; }
+html[data-theme="dark"] .tier-2 .cert-tag { background: rgba(29,78,216,.18); color: #93c5fd; border-color: #1d4ed8; }
+html[data-theme="dark"] .tier-3 .cert-tag { background: rgba(255,255,255,.03); color: var(--text-main); border-color: #3a404d; }
+
+/* 기술 스택 — skill-label 가변폭 */
+.skill-grid { display: flex; flex-direction: column; gap: 9px; }
+.skill-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.skill-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  min-width: 82px;
+  text-align: center;
+  letter-spacing: .02em;
+}
+.skill-label--cloud { background: var(--category-cloud-bg); color: var(--category-cloud-text); }
+.skill-label--container { background: var(--category-container-bg); color: var(--category-container-text); }
+.skill-label--iac { background: var(--category-iac-bg); color: var(--category-iac-text); }
+.skill-label--cicd { background: var(--category-cicd-bg); color: var(--category-cicd-text); }
+.skill-label--observability { background: var(--category-observability-bg); color: var(--category-observability-text); }
+.skill-label--script { background: var(--category-script-bg); color: var(--category-script-text); }
+
+.skill-chip {
+  font-size: 0.78rem;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: var(--body-background);
+  color: var(--text-secondary);
+  border: 1px solid var(--card-separator-color);
+}
+
+/* =========================================
+   Post List
+   ========================================= */
+.post-list-header {
+  margin: 32px 0 16px;
+}
+.post-list-header h2 {
+  font-size: var(--font-h1);
+  font-weight: 700;
+  margin: 0;
+  border-left: 4px solid var(--brand-primary);
+  padding-left: 12px;
+  color: var(--text-main);
+}
+
+.article-list { display: flex; flex-direction: column; gap: 20px; }
+
+.home-post-card {
+  background: var(--card-background);
+  border: 1px solid var(--card-separator-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-l1);
+  overflow: hidden;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.home-post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-l2);
+  border-color: #d6dae3;
+}
+html[data-theme="dark"] .home-post-card:hover { border-color: #323847; }
+
+.article-details {
+  /* 대칭 패딩 */
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.article-hashtags { display: flex; gap: 10px; flex-wrap: wrap; }
+.article-hashtags a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+.article-hashtags a:hover { text-decoration: underline; }
+
+.article-title {
+  font-size: var(--font-card-title);
+  line-height: 1.35;
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.article-subtitle {
+  font-size: var(--font-subtitle);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.article-meta-row {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.article-meta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: var(--font-meta);
+  color: var(--text-tertiary);
+}
+.article-meta .inline { display: inline-flex; align-items: center; gap: 5px; }
+.article-meta svg { width: 14px; height: 14px; stroke: currentColor; }
+
+.article-category a {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: lowercase;
+  letter-spacing: .02em;
+}
+.cat-cloud { background: var(--category-cloud-bg); color: var(--category-cloud-text); }
+.cat-container { background: var(--category-container-bg); color: var(--category-container-text); }
+.cat-observability { background: var(--category-observability-bg); color: var(--category-observability-text); }
+
+/* =========================================
+   Responsive
+   ========================================= */
+@media (max-width: 768px) {
+  .hero-body { grid-template-columns: 1fr; }
+  .hero-col:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--card-separator-color);
+  }
+  .hero-header { flex-direction: column; align-items: flex-start; }
+  .article-details { padding: 18px 18px; }
+  .article-title { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  <div>
+    <strong>Design Preview</strong> — momin09.github.io 개선안
+    <span class="legend"> · 타이포 ↓22% · 색상 토큰화 · Hero 균형 · 대칭 패딩</span>
+  </div>
+  <button onclick="toggleTheme()">🌓 다크/라이트 토글</button>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero-profile">
+    <div class="hero-header">
+      <div>
+        <p class="hero-role">☁️ Cloud &amp; DevOps Engineer</p>
+        <p class="hero-sub">AWS · Kubernetes · Terraform · Python &nbsp;|&nbsp; DevOps → AI DevOps</p>
+      </div>
+    </div>
+
+    <div class="hero-body">
+      <!-- Certifications -->
+      <div class="hero-col">
+        <div class="hero-col-title">🏅 Certifications</div>
+        <ul class="cert-timeline">
+          <li class="cert-row tier-1"><span class="cert-year">2024</span>
+            <span class="cert-tags"><span class="cert-tag">AWS SAP</span></span>
+          </li>
+          <li class="cert-row tier-2"><span class="cert-year">2023</span>
+            <span class="cert-tags"><span class="cert-tag">CKA</span><span class="cert-tag">AWS SAA</span></span>
+          </li>
+          <li class="cert-row tier-3"><span class="cert-year">2022</span>
+            <span class="cert-tags"><span class="cert-tag">정보처리기사</span><span class="cert-tag">네트워크관리사 2급</span></span>
+          </li>
+          <li class="cert-row tier-3"><span class="cert-year">2021</span>
+            <span class="cert-tags"><span class="cert-tag">AWS CCP</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="hero-col">
+        <div class="hero-col-title">🛠 Tech Stack</div>
+        <div class="skill-grid">
+          <div class="skill-row">
+            <span class="skill-label skill-label--cloud">Cloud</span>
+            <span class="skill-chip">AWS</span><span class="skill-chip">EKS</span>
+            <span class="skill-chip">Lambda</span><span class="skill-chip">CloudFront</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label skill-label--container">Container</span>
+            <span class="skill-chip">Kubernetes</span><span class="skill-chip">Helm</span><span class="skill-chip">Docker</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label skill-label--iac">IaC</span>
+            <span class="skill-chip">Terraform</span><span class="skill-chip">AWS SAM</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label skill-label--cicd">CI/CD</span>
+            <span class="skill-chip">Jenkins</span><span class="skill-chip">ArgoCD</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label skill-label--observability">Observability</span>
+            <span class="skill-chip">Datadog</span><span class="skill-chip">CloudWatch</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label skill-label--script">Script</span>
+            <span class="skill-chip">Python</span><span class="skill-chip">Bash</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POST LIST ============ -->
+  <div class="post-list-header"><h2>최신 글</h2></div>
+
+  <section class="article-list">
+
+    <article class="home-post-card">
+      <div class="article-details">
+        <h3 class="article-title">EKS RBAC 권한 감사 자동화 파이프라인 구축기</h3>
+        <div class="article-hashtags">
+          <a href="#">#EKS</a><a href="#">#Kubernetes</a><a href="#">#RBAC</a>
+        </div>
+        <p class="article-subtitle">IAM과 Kubernetes RBAC을 주기적으로 수집·비교하여 권한 변동을 탐지하는 파이프라인을 구축한 과정과 트러블슈팅 노트.</p>
+        <div class="article-meta-row">
+          <div class="article-meta">
+            <span class="inline">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              2026-04-02
+            </span>
+            <span class="inline">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              8 min read
+            </span>
+          </div>
+          <div class="article-category"><a class="cat-container" href="#">container</a></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="home-post-card">
+      <div class="article-details">
+        <h3 class="article-title">Datadog APM으로 마이크로서비스 병목 지점 찾기</h3>
+        <div class="article-hashtags">
+          <a href="#">#Datadog</a><a href="#">#APM</a><a href="#">#Observability</a>
+        </div>
+        <p class="article-subtitle">실제 프로덕션 트래픽에서 발견한 N+1 쿼리와 불필요한 외부 API 호출을 Flame Graph 기반으로 추적한 사례.</p>
+        <div class="article-meta-row">
+          <div class="article-meta">
+            <span class="inline">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              2026-03-27
+            </span>
+            <span class="inline">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              6 min read
+            </span>
+          </div>
+          <div class="article-category"><a class="cat-observability" href="#">observability</a></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="home-post-card">
+      <div class="article-details">
+        <h3 class="article-title">CloudFront Functions로 A/B 라우팅 구현하기</h3>
+        <div class="article-hashtags">
+          <a href="#">#AWS</a><a href="#">#Lambda</a><a href="#">#CloudFront</a>
+        </div>
+        <p class="article-subtitle">Lambda@Edge 대비 실행 비용을 1/6로 줄인 경량 라우팅 설계 — 쿠키 기반 가중치 분배와 캐시 키 전략.</p>
+        <div class="article-meta-row">
+          <div class="article-meta">
+            <span class="inline">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              2026-03-19
+            </span>
+            <span class="inline">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              5 min read
+            </span>
+          </div>
+          <div class="article-category"><a class="cat-cloud" href="#">cloud</a></div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+</div>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+  }
+  // 시스템 선호도 초기값
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+</script>
+</body>
+</html>

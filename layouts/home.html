@@ -42,35 +42,35 @@
                 <div class="hero-col-title">🛠 Tech Stack</div>
                 <div class="skill-grid">
                     <div class="skill-row">
-                        <span class="skill-label label-cloud">Cloud</span>
+                        <span class="skill-label skill-label--cloud">Cloud</span>
                         <span class="skill-chip">AWS</span>
                         <span class="skill-chip">EKS</span>
                         <span class="skill-chip">Lambda</span>
                         <span class="skill-chip">CloudFront</span>
                     </div>
                     <div class="skill-row">
-                        <span class="skill-label label-k8s">Container</span>
+                        <span class="skill-label skill-label--container">Container</span>
                         <span class="skill-chip">Kubernetes</span>
                         <span class="skill-chip">Helm</span>
                         <span class="skill-chip">Docker</span>
                     </div>
                     <div class="skill-row">
-                        <span class="skill-label label-iac">IaC</span>
+                        <span class="skill-label skill-label--iac">IaC</span>
                         <span class="skill-chip">Terraform</span>
                         <span class="skill-chip">AWS SAM</span>
                     </div>
                     <div class="skill-row">
-                        <span class="skill-label label-cicd">CI/CD</span>
+                        <span class="skill-label skill-label--cicd">CI/CD</span>
                         <span class="skill-chip">Jenkins</span>
                         <span class="skill-chip">ArgoCD</span>
                     </div>
                     <div class="skill-row">
-                        <span class="skill-label label-obs">Observability</span>
+                        <span class="skill-label skill-label--observability">Observability</span>
                         <span class="skill-chip">Datadog</span>
                         <span class="skill-chip">CloudWatch</span>
                     </div>
                     <div class="skill-row">
-                        <span class="skill-label label-code">Script</span>
+                        <span class="skill-label skill-label--script">Script</span>
                         <span class="skill-chip">Python</span>
                         <span class="skill-chip">Bash</span>
                     </div>
@@ -87,7 +87,7 @@
 
     <section class="article-list">
         {{ range $index, $element := $paginator.Pages }}
-            {{ partial "article-list/default" . }}
+            {{ partial "article-list/home-card" . }}
         {{ end }}
     </section>
 

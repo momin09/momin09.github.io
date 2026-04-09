@@ -1,0 +1,30 @@
+{{- $relPermalink := "" -}}
+{{- with .RelPermalink -}}
+    {{- $relPermalink = . -}}
+{{- end -}}
+{{- if not $relPermalink -}}
+    {{- with .Page.RelPermalink -}}
+        {{- $relPermalink = . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $key := "" -}}
+{{- with $relPermalink -}}
+    {{- $key = replaceRE "^.*/([^/]+)$" "$1" (trim . "/") -}}
+{{- end -}}
+
+{{- $palettes := dict
+    "ai" (dict "BackgroundColor" "var(--category-ai-bg)" "TextColor" "var(--category-ai-text)")
+    "cicd" (dict "BackgroundColor" "var(--category-cicd-bg)" "TextColor" "var(--category-cicd-text)")
+    "cloud" (dict "BackgroundColor" "var(--category-cloud-bg)" "TextColor" "var(--category-cloud-text)")
+    "container" (dict "BackgroundColor" "var(--category-container-bg)" "TextColor" "var(--category-container-text)")
+    "documentation" (dict "BackgroundColor" "var(--category-documentation-bg)" "TextColor" "var(--category-documentation-text)")
+    "iac" (dict "BackgroundColor" "var(--category-iac-bg)" "TextColor" "var(--category-iac-text)")
+    "observability" (dict "BackgroundColor" "var(--category-observability-bg)" "TextColor" "var(--category-observability-text)")
+    "orchestration" (dict "BackgroundColor" "var(--category-orchestration-bg)" "TextColor" "var(--category-orchestration-text)")
+    "os" (dict "BackgroundColor" "var(--category-os-bg)" "TextColor" "var(--category-os-text)")
+    "script" (dict "BackgroundColor" "var(--category-script-bg)" "TextColor" "var(--category-script-text)")
+-}}
+
+{{- $palette := index $palettes $key | default dict -}}
+{{- return merge (dict "Key" $key) $palette -}}

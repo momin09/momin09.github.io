@@ -1,0 +1,67 @@
+{{- $Page := .Page -}}
+{{- $showReadingTime := $Page.Params.readingTime | default ($Page.Site.Params.article.readingTime) -}}
+{{- $showDate := not $Page.Date.IsZero -}}
+{{- $terms := $Page.GetTerms "categories" -}}
+{{- $tags := first 3 ($Page.GetTerms "tags") -}}
+
+<div class="article-details article-details--home">
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="{{ $Page.RelPermalink }}">
+                {{- $Page.Title -}}
+            </a>
+        </h2>
+
+        {{ if $tags }}
+        <div class="article-home-hashtags">
+            {{ range $tags }}
+                <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+
+        {{ with $Page.Params.description }}
+        <h3 class="article-subtitle">
+            {{ . }}
+        </h3>
+        {{ end }}
+    </div>
+
+    {{ if or $showDate $showReadingTime $terms }}
+    <footer class="article-meta-row">
+        <div class="article-meta article-meta--home">
+            {{ if $showDate }}
+                <span class="inline-meta">
+                    {{ partial "helper/icon" "date" }}
+                    <time class="article-time--published" datetime='{{ $Page.Date.Format "2006-01-02T15:04:05Z07:00" }}'>
+                        {{- $Page.Date | time.Format $Page.Site.Params.dateFormat.published -}}
+                    </time>
+                </span>
+            {{ end }}
+
+            {{ if $showReadingTime }}
+                <span class="inline-meta">
+                    {{ partial "helper/icon" "clock" }}
+                    <time class="article-time--reading">
+                        {{ T "article.readingTime" $Page.ReadingTime }}
+                    </time>
+                </span>
+            {{ end }}
+        </div>
+
+        {{ if $terms }}
+        <div class="article-category article-category--home">
+            {{ range $terms }}
+                {{ $color := partial "helper/color-from-str" .LinkTitle }}
+                {{ $palette := partial "helper/category-palette" . }}
+                {{ $backgroundColor := or $palette.BackgroundColor .Params.style.background $color.BackgroundColor }}
+                {{ $textColor := or $palette.TextColor .Params.style.color $color.TextColor }}
+                <a href="{{ .RelPermalink }}" style="background-color: {{ $backgroundColor | safeCSS }}; color: {{ $textColor | safeCSS }};">
+                    {{ .LinkTitle }}
+                </a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </footer>
+    {{ end }}
+</div>

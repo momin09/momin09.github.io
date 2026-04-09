@@ -1,7 +1,7 @@
 ---
 title: Observability
 cascade:
-  - _target:
+  - target:
       kind: page
     categories: [Observability]
 ---
