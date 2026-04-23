@@ -4,6 +4,11 @@ date: 2026-04-01
 draft: false
 toc: true
 comments: false
+homeProject: true
+homeLabel: "Automation"
+homeSummary: "EventBridge와 Lambda로 ECR 태그와 Lifecycle 정책을 자동 복제한 구조."
+homeTags: ["Lambda", "EventBridge", "ECR"]
+image: sync-architecture.svg
 ---
 
 ## 아키텍처

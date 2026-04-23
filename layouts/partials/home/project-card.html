@@ -1,0 +1,91 @@
+{{- $page := . -}}
+{{- $image := partial "helper/image" (dict "Image" $page.Params.image "Resources" $page.Resources "Context" $page) -}}
+
+{{- /* 카테고리 색상 매핑 */ -}}
+{{- $label := $page.Params.homeLabel | default "" -}}
+{{- $labelLower := lower $label -}}
+{{- $bg := "#e2e8f0" -}}{{- $fg := "#475569" -}}
+{{- $gradLight := "linear-gradient(135deg, #e2e8f0, #cbd5e1)" -}}
+{{- $gradDark := "linear-gradient(135deg, #334155, #475569)" -}}
+{{- if eq $labelLower "cloud" -}}
+    {{- $bg = "#bae6fd" -}}{{- $fg = "#0c4a6e" -}}
+    {{- $gradLight = "linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%)" -}}
+    {{- $gradDark = "linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 50%, #3b82f6 100%)" -}}
+{{- else if eq $labelLower "automation" -}}
+    {{- $bg = "#fecaca" -}}{{- $fg = "#991b1b" -}}
+    {{- $gradLight = "linear-gradient(135deg, #fef2f2 0%, #fecaca 40%, #fca5a5 100%)" -}}
+    {{- $gradDark = "linear-gradient(135deg, #5f1e1e 0%, #b91c1c 50%, #ef4444 100%)" -}}
+{{- else if eq $labelLower "container" -}}
+    {{- $bg = "#ccfbf1" -}}{{- $fg = "#115e59" -}}
+    {{- $gradLight = "linear-gradient(135deg, #ccfbf1 0%, #99f6e4 40%, #5eead4 100%)" -}}
+    {{- $gradDark = "linear-gradient(135deg, #134e4a 0%, #0f766e 50%, #14b8a6 100%)" -}}
+{{- else if eq $labelLower "iac" -}}
+    {{- $bg = "#ddd6fe" -}}{{- $fg = "#5b21b6" -}}
+    {{- $gradLight = "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 40%, #c4b5fd 100%)" -}}
+    {{- $gradDark = "linear-gradient(135deg, #3b0764 0%, #6d28d9 50%, #8b5cf6 100%)" -}}
+{{- else if eq $labelLower "observability" -}}
+    {{- $bg = "#dcfce7" -}}{{- $fg = "#166534" -}}
+    {{- $gradLight = "linear-gradient(135deg, #dcfce7 0%, #bbf7d0 40%, #86efac 100%)" -}}
+    {{- $gradDark = "linear-gradient(135deg, #14532d 0%, #15803d 50%, #22c55e 100%)" -}}
+{{- end -}}
+
+<article class="home-project-card">
+    <a href="{{ $page.RelPermalink }}" class="home-project-card__link">
+        {{/* 썸네일 영역: 이미지가 있으면 이미지, 없으면 그라데이션 */}}
+        {{ if $image }}
+        <div class="home-project-card__thumb">
+            <img src="{{ $image.Permalink }}" alt="{{ $page.Title }}" loading="lazy" width="{{ $image.Width }}" height="{{ $image.Height }}">
+        </div>
+        {{ else }}
+        {{- /* tech stack 기반 아이콘 매핑 */ -}}
+        {{- $icon := "⚙️" -}}
+        {{- $tags := $page.Params.homeTags | default slice -}}
+        {{- $firstTag := "" -}}{{- with $tags }}{{ $firstTag = index . 0 | lower }}{{ end -}}
+        {{- if or (eq $firstTag "eks") (eq $firstTag "ecs") (eq $firstTag "kubernetes") (eq $firstTag "k8s") -}}
+            {{- $icon = "☸️" -}}
+        {{- else if or (eq $firstTag "lambda") (eq $firstTag "serverless") -}}
+            {{- $icon = "⚡" -}}
+        {{- else if or (eq $firstTag "terraform") (eq $firstTag "cloudformation") -}}
+            {{- $icon = "🏗️" -}}
+        {{- else if or (eq $firstTag "docker") (eq $firstTag "container") -}}
+            {{- $icon = "🐳" -}}
+        {{- else if or (eq $firstTag "jenkins") (eq $firstTag "argocd") (eq $firstTag "cicd") -}}
+            {{- $icon = "🔄" -}}
+        {{- else if or (eq $firstTag "datadog") (eq $firstTag "cloudwatch") (eq $firstTag "grafana") -}}
+            {{- $icon = "📊" -}}
+        {{- else if or (eq $labelLower "cloud") (eq $firstTag "aws") (eq $firstTag "gcp") (eq $firstTag "azure") -}}
+            {{- $icon = "☁️" -}}
+        {{- else if eq $labelLower "automation" -}}
+            {{- $icon = "🤖" -}}
+        {{- end -}}
+        <div class="home-project-card__thumb home-project-card__thumb--gradient" style="--grad-light: {{ $gradLight }}; --grad-dark: {{ $gradDark }};">
+            <span class="home-project-card__grad-icon">{{ $icon }}</span>
+        </div>
+        {{ end }}
+
+        <div class="home-project-card__body">
+            <div class="home-project-card__content">
+                <h3 class="home-project-card__title">{{ $page.Title }}</h3>
+
+                {{ with $page.Params.homeTags }}
+                <div class="home-project-card__tags">
+                    {{ range . }}<span>#{{ . }}</span>{{ end }}
+                </div>
+                {{ end }}
+
+                {{ with $page.Params.homeSummary }}
+                <p class="home-project-card__desc">{{ . }}</p>
+                {{ end }}
+            </div>
+
+            <div class="home-project-card__footer">
+                <time datetime='{{ $page.Date.Format "2006-01-02T15:04:05Z07:00" }}'>
+                    {{- $page.Date | time.Format "2006.01" -}}
+                </time>
+                {{ with $label }}
+                <span class="home-project-card__category" style="background-color: {{ $bg }}; color: {{ $fg }};">{{ . }}</span>
+                {{ end }}
+            </div>
+        </div>
+    </a>
+</article>

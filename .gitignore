@@ -4,6 +4,12 @@
 /assets/jsconfig.json
 hugo_stats.json
 
+# Temporary Files
+temp*
+
+# n8n scripts
+scripts/*
+
 # IDEs
 .idea/
 .vscode/
@@ -17,6 +23,12 @@ Thumbs.db
 
 # Temporary files
 tmp/
+
+# n8n automation drafts (synced from OneDrive\Knowledge)
+/content/post/_draft/
+
+# Node scripts for n8n automation
+/scripts/node_modules/
 
 # Draw.io files
 *.drawio

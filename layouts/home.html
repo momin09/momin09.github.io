@@ -1,5 +1,13 @@
 {{ define "main" }}
     {{- $paginator := partial "helper/paginator.html" . -}}
+    {{- $projects := slice -}}
+    {{- with .Site.GetPage "/page/eks-bootstrap" -}}
+        {{- $projects = $projects | append . -}}
+    {{- end -}}
+    {{- with .Site.GetPage "/page/project/ecr-replication" -}}
+        {{- $projects = $projects | append . -}}
+    {{- end -}}
+    {{- $latestPosts := first 5 $paginator.Pages -}}
 
     <!-- Hero Section -->
     <section class="hero-profile">
@@ -80,18 +88,72 @@
 
     </section>
 
+    {{ if $projects }}
+    <div class="post-list-header">
+        <h2>Projects</h2>
+    </div>
+
+    <div class="home-projects-shell">
+        <button class="home-projects-arrow home-projects-arrow--prev hidden" id="projectArrowPrev" aria-label="이전 프로젝트">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+
+        <div class="home-projects-track" id="projectTrack">
+            {{ range $projects }}
+                {{ partial "home/project-card" . }}
+            {{ end }}
+        </div>
+
+        <button class="home-projects-arrow home-projects-arrow--next" id="projectArrowNext" aria-label="다음 프로젝트">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+    (function() {
+        const track = document.getElementById('projectTrack');
+        const prev = document.getElementById('projectArrowPrev');
+        const next = document.getElementById('projectArrowNext');
+        if (!track || !prev || !next) return;
+
+        function update() {
+            const atStart = track.scrollLeft <= 2;
+            const atEnd = track.scrollLeft + track.offsetWidth >= track.scrollWidth - 2;
+            prev.classList.toggle('hidden', atStart);
+            next.classList.toggle('hidden', atEnd);
+        }
+
+        prev.addEventListener('click', function() {
+            var card = track.querySelector('.home-project-card');
+            if (card) track.scrollBy({ left: -(card.offsetWidth + 22), behavior: 'smooth' });
+        });
+        next.addEventListener('click', function() {
+            var card = track.querySelector('.home-project-card');
+            if (card) track.scrollBy({ left: card.offsetWidth + 22, behavior: 'smooth' });
+        });
+
+        track.addEventListener('scroll', update);
+        window.addEventListener('resize', update);
+        update();
+    })();
+    </script>
+    {{ end }}
+
     <!-- Post List -->
     <div class="post-list-header">
         <h2>최신 글</h2>
     </div>
 
     <section class="article-list">
-        {{ range $index, $element := $paginator.Pages }}
+        {{ range $index, $element := $latestPosts }}
             {{ partial "article-list/home-card" . }}
         {{ end }}
     </section>
 
-    {{- partial "pagination.html" . -}}
     {{- partial "footer/footer" . -}}
 {{ end }}
 

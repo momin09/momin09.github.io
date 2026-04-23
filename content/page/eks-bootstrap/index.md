@@ -4,6 +4,10 @@ date: 2026-04-09T00:00:00+09:00
 draft: false
 toc: true
 comments: false
+homeProject: true
+homeLabel: "Cloud"
+homeSummary: "EKS 생성부터 Fargate, ALB, ArgoCD까지 연결한 초기 부트스트랩 구성."
+homeTags: ["EKS", "Fargate", "ArgoCD"]
 aliases:
     - /page/project/eks-bootstrap/
 ---
